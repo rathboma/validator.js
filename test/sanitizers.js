@@ -220,6 +220,16 @@ describe('Sanitizers', function () {
     });
   });
 
+  it('should return correctly for invalid plus addresses', function () {
+    test({
+      sanitizer: 'normalizeEmail',
+      expect: {
+        '+123456789@gmail.com': '+123456789@gmail.com',
+        '+123456789@example.com': '+123456789@example.com',
+      },
+    });
+  });
+
   it('should normalize an email based on domain', function () {
     test({
       sanitizer: 'normalizeEmail',

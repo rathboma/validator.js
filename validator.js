@@ -1459,6 +1459,8 @@ var yahoo_domains = ['rocketmail.com', 'yahoo.ca', 'yahoo.co.uk', 'yahoo.com', '
 // List of domains used by yandex.ru
 var yandex_domains = ['yandex.ru', 'yandex.ua', 'yandex.kz', 'yandex.com', 'yandex.by', 'ya.ru'];
 
+var plus_first = /^\+/;
+
 // replace single dots, but not multiple consecutive dots
 function dotsReplacer(match) {
   if (match.length > 1) {
@@ -1481,7 +1483,10 @@ function normalizeEmail(email, options) {
   if (parts[1] === 'gmail.com' || parts[1] === 'googlemail.com') {
     // Address is GMail
     if (options.gmail_remove_subaddress) {
-      parts[0] = parts[0].split('+')[0];
+      // if the plus is first, it is not a sub-address
+      if (!plus_first.test(parts[0])) {
+        parts[0] = parts[0].split('+')[0];
+      }
     }
     if (options.gmail_remove_dots) {
       // this does not replace consecutive dots like example..email@gmail.com

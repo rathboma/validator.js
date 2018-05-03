@@ -60,6 +60,8 @@ describe('Validators', function () {
         `${repeat('a', 64)}@${repeat('a', 63)}.com`,
         `${repeat('a', 64)}@${repeat('a', 63)}.${repeat('a', 63)}.${repeat('a', 63)}.${repeat('a', 58)}.com`,
         `${repeat('a', 64)}@${repeat('a', 63)}.com`,
+        '+123456789@example.com',
+        '+123456789@gmail.com',
       ],
       invalid: [
         'invalidemail@',
